@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persistodon</title>
+  <link rel="icon" href="https://fav.farm/🦕">
+  <style>
+    /* JMU Slate Gray: #333333 Ice Blue: #8EE4D7 JMU Purple: #450084 Teal: #009698 JMU Light Gold: #F4EFE1 */
+    body {
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      font-family: Roboto;
+    }
+
+    main {
+      background-color: #F4EFE1;
+      color: #333;
+      flex-grow: 1;
+      padding: 1rem;
+    }
+
+    aside {
+      border-inline-start: 1rem solid #009698;
+      background-color: #450084;
+      color: #8EE4D7;
+      max-width: 33vw;
+      padding: 1rem;
+    }
+
+    aside a {
+      color: #F4EFE1;
+    }
+
+    aside a:visited {
+      color: #009698;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    h1 {
+      flex-grow: 1;
+    }
+    
+    #downloads {
+      display: none;
+    }
+
+    code {
+      background-color: #00000099;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>🦕 Persistodon</h1>
+      <button id="share" type="button">Get Sharable URL</button>
+      <button id="export" type="button">Export</button>
+      <form action="#" id="import-form">
+        <label for="import-file">🦖 Tranportodons</label>
+        <input type="file" name="import-file" id="import-file">
+        <button id="import" type="submit">Import</button>
+      </form>
+    </header>
+    <form id="new-item-form" action="#">
+      <label for="item">New todo item</label>
+      <input type="text" name="item" id="item">
+      <button type="submit">Add</button>
+    </form>
+    <ol id="items"></ol>
+    <div id="downloads"></div>
+  </main>
+  <aside>
+    <section>
+      <h2>Overview</h2>
+      <p>Look at this excellent little TODO app! 🤩 The code as provided implements these features:</p>
+      <ul>
+        <li>Adding items to the todo list</li>
+        <li>listing the new item at the end of the existing to do list items</li>
+        <li><em>persist</em> the todo items to <code>localStorage</code> as they are added to the to do list</li>
+        <li><em>load any todo items from <code>localStorage</code> when the page loads </em></li>
+      </ul>
+    </section>
+    <hr>
+    <section>
+      <p>Know what might be neato? I think it needs MOAR ... 🔔</p>
+      <h2>Part 1: Sharasaurus - <a target="_blank" rel="noopener noreferrer" href="https://en.wiktionary.org/wiki/persistence">persistence
+          /pəˈsɪst(ə)ns/</a></h2>
+      <p>How couuld we view the same list on our phone as we are viewing on our laptop? Share the list with a friend?
+      </p>
+      <h3>TODO</h3>
+      <p>There are <code>// TODO</code> comments in the javascript to guide you in your way while you add these features:</p>
+      <ol>
+        <li>Modify the existing <code>Get Sharable URL</code> button so that it updates the url so that all of the todo
+          items currently stored in <code>localStorage</code> are encoded in the <code>query string</code> in the browser's address
+          bar.</li>
+        <li>Modify the existing code to notice it was passed a query string and to populate <code>localStorage</code> initially with
+          the items in the query string</li>
+      </ol>
+    </section>
+    <hr>
+    <section>
+      <h2>Part 2: Transportodon</h2>
+      <p>Coming soon...</p>
+    </section>
+  </aside>
+  <script>
+    // get the DOM elements
+    const form = document.getElementById('new-item-form')
+    const input = document.getElementById('item')
+    const list = document.getElementById('items')
+
+    function addItemToList(item) {
+      const newLi = document.createElement('li')
+      newLi.textContent = item;
+      list.append(newLi)
+    }
+
+    //handle loading from localStorage
+    const items = localStorage.getItem('items');
+    if (items) {
+      JSON.parse(items).forEach(addItemToList)
+    }
+
+    //handle form persisting to localStorage
+
+    form.addEventListener('submit', (ev) => {
+      console.log('form submitted')
+      ev.preventDefault()
+      addItemToList(input.value);
+      // const items = 
+      localStorage.setItem('items', JSON.stringify([...JSON.parse(localStorage.getItem('items') ?? '[]'), input.value]))
+      input.value = ''
+    })
+
+    // get url
+    const shareButton = document.getElementById('share')
+    shareButton.addEventListener('click', (ev) => {
+      console.log('share button was clicked')
+
+      // TODO redirect to a sharable link by completing the steps below
+
+      // 1. get the current state from localStorage
+
+      // 2. create a URLSearchParams object from the data you rretrieved from localStorage
+
+      // 3. get the current url from window.location
+
+      // 4. set the current url's search property to '?' concatenated with: the urlsearchparams object's tostring 
+
+      // 5. update the window.location to the result of the preceding step
+    })
+
+    // TODO update from URL by completing the steps below:
+    // 1. when the page loads, look to see if the url has a querystring that has the kind of data you added to it above
+    // 2. if there is such data in the querystring, replace the state in localStorage with the data in the URL
+
+
+
+  </script>
+</body>
+
+</html>
