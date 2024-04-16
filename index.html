@@ -47,7 +47,7 @@
     h1 {
       flex-grow: 1;
     }
-    
+
     #downloads {
       display: none;
     }
@@ -92,17 +92,21 @@
     <hr>
     <section>
       <p>Know what might be neato? I think it needs MOAR ... 🔔</p>
-      <h2>Part 1: Sharasaurus - <a target="_blank" rel="noopener noreferrer" href="https://en.wiktionary.org/wiki/persistence">persistence
+      <h2>Part 1: Sharasaurus - <a target="_blank" rel="noopener noreferrer"
+          href="https://en.wiktionary.org/wiki/persistence">persistence
           /pəˈsɪst(ə)ns/</a></h2>
       <p>How couuld we view the same list on our phone as we are viewing on our laptop? Share the list with a friend?
       </p>
       <h3>TODO</h3>
-      <p>There are <code>// TODO</code> comments in the javascript to guide you in your way while you add these features:</p>
+      <p>There are <code>// TODO</code> comments in the javascript to guide you in your way while you add these
+        features:</p>
       <ol>
         <li>Modify the existing <code>Get Sharable URL</code> button so that it updates the url so that all of the todo
-          items currently stored in <code>localStorage</code> are encoded in the <code>query string</code> in the browser's address
+          items currently stored in <code>localStorage</code> are encoded in the <code>query string</code> in the
+          browser's address
           bar.</li>
-        <li>Modify the existing code to notice it was passed a query string and to populate <code>localStorage</code> initially with
+        <li>Modify the existing code to notice it was passed a query string and to populate <code>localStorage</code>
+          initially with
           the items in the query string</li>
       </ol>
     </section>
@@ -149,20 +153,35 @@
       // TODO redirect to a sharable link by completing the steps below
 
       // 1. get the current state from localStorage
-
-      // 2. create a URLSearchParams object from the data you rretrieved from localStorage
-
+      let items = null;
+      if (localStorage.getItem('items') != null) {
+        items = localStorage.getItem('items');
+      }
+      // 2. create a URLSearchParams object from the data you retrieved from localStorage
+      let searchParams = new URLSearchParams({items});
       // 3. get the current url from window.location
-
+      let windowLocation = window.location;
+      let currentURL = new URL(windowLocation.href);
       // 4. set the current url's search property to '?' concatenated with: the urlsearchparams object's tostring 
-
+      currentURL.search = '?' + searchParams.toString();
       // 5. update the window.location to the result of the preceding step
+      window.location.assign(currentURL.href);
     })
 
     // TODO update from URL by completing the steps below:
     // 1. when the page loads, look to see if the url has a querystring that has the kind of data you added to it above
     // 2. if there is such data in the querystring, replace the state in localStorage with the data in the URL
-
+    document.addEventListener("DOMContentLoaded", (ev) => {
+      let queryString = window.location.search;
+      if (queryString.length !== 0) {
+        queryString = queryString.substring(1);
+        queryString = decodeURIComponent(queryString);
+        let searchParams = new URLSearchParams(queryString);
+        let items = searchParams.get('items');
+        items = JSON.parse(items);
+        localStorage.setItem('items', JSON.stringify(items));
+      }
+    });
 
 
   </script>
