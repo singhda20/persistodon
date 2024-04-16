@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Persistodon</title>
   <link rel="icon" href="https://fav.farm/🦕">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto&display=swap" rel="stylesheet">
   <style>
     /* JMU Slate Gray: #333333 Ice Blue: #8EE4D7 JMU Purple: #450084 Teal: #009698 JMU Light Gold: #F4EFE1 */
     body {
@@ -28,6 +31,10 @@
       color: #8EE4D7;
       max-width: 33vw;
       padding: 1rem;
+    }
+
+    main, aside {
+      overflow-y: scroll;
     }
 
     aside a {
@@ -149,7 +156,7 @@
     const shareButton = document.getElementById('share')
     shareButton.addEventListener('click', (ev) => {
       console.log('share button was clicked')
-
+x
       // TODO redirect to a sharable link by completing the steps below
 
       // 1. get the current state from localStorage
